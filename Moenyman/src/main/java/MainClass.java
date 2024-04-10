@@ -35,7 +35,7 @@ new Thread(store).start();*/
 	 StockPrices stockprices= GetStockHistory.getHistory("HUGE");
 	System.out.println(stockprices.toString());
 
-	
+	System.out.println();
 	}
 
 }
