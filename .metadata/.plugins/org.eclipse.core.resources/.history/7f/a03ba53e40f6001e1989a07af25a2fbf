@@ -1,0 +1,40 @@
+package databaseinitialization;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+
+import Persistence.GetAllTickers;
+import Persistence.StoringAllTickers;
+import Persistence.StoringStockPricesDaily;
+import Persistence.StoringTickerDetails;
+import stockmarkethistoryapi.StockpriceshistoryAPI;
+import stockmarkethistoryapi.TickerDetailsAPI;
+
+public class CreatingTablesAndValues {
+	public static void creatingTablesandValues() {
+		//Create all tables for the DataBase
+		CreateAllDBTables createall=new CreateAllDBTables();
+		createall.createTableStockPrices();
+		
+		//Get all Tickers:common stocks
+		String url="https://api.polygon.io/v3/reference/tickers?type=CS&market=stocks&apiKey=tEboLkojLxgaz2hAj83wTQZIG1te0iLT";
+		StoringAllTickers so=new StoringAllTickers();
+		so.storeAllTickers(url);
+
+
+		
+		//Getting all Stocks and their details and storing it in the DB
+		ArrayList<String> stocks=GetAllTickers.getAllTickers();
+		StoringTickerDetails storingDetailsstocks=new StoringTickerDetails();
+		
+		for(String stock:stocks) {
+		String detailsticker=	TickerDetailsAPI.getTickerDetails(stock);
+			boolean valueboolean=storingDetailsstocks.storeTickerDetails(detailsticker);
+			
+		}
+		
+		
+		
+	}
+
+}

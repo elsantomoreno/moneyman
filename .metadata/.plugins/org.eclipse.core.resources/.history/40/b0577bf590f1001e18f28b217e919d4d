@@ -1,0 +1,12 @@
+package main;
+
+import WebServices.ConnectingWebSocketStocks;
+
+public class MainTrading {
+
+	public static void main(String[] args) {
+ConnectingWebSocketStocks.connect();
+
+	}
+
+}

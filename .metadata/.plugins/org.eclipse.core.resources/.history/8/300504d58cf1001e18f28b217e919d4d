@@ -1,0 +1,6 @@
+package Collection;
+
+public class Versuch {
+	public static final String HALO="dvdvasdvd";
+
+}

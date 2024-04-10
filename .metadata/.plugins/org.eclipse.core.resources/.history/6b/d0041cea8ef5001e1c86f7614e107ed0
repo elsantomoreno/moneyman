@@ -1,0 +1,108 @@
+package Persistence;
+
+import java.net.http.HttpResponse;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Time;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneOffset;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import Data.Datacollection;
+import UserDefinedClasses.StockIntraDayPrices;
+import UserDefinedClasses.StockPrices;
+
+public class StoringTickerDetails {
+	String jdbcUrl;
+	String username;
+	String password;
+
+	public StoringTickerDetails() {
+		super();
+		this.jdbcUrl = "jdbc:postgresql://localhost:5432/stocks";
+		this.username = "postgres";
+		this.password = "stocks";
+
+	}
+
+	public void storeTickerDetails(String response) {
+		String sql = "INSERT INTO tickersdetails values(ticker,list_date,market_cap,shares_outstanding,sic_description,weighted_shares_outstanding) values(?,?,?,?,?);";
+
+		try (Connection connection = DriverManager.getConnection(jdbcUrl, username, password)) {
+
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+			JSONObject res = new JSONObject(response);
+
+			// Extract the array of historical stock data
+			JSONArray results = res.getJSONArray("results");
+		
+			// Iterate over each entry in the historical stock data array
+			for (int i = 0; i < results.length(); i++) {
+				JSONObject data = results.getJSONObject(i);
+
+				String ticker = null;
+				if (data.has("ticker")) {
+					ticker= data.getString("ticker");
+			
+				}
+				String listdatestring = null;
+				java.sql.Date listdatesql=null;
+				if (data.has("list_date")) {
+					listdatestring= data.getString("list_date");
+					listdatesql=Datacollection.getSQLDate(listdatestring);
+						
+				}
+				/*String delisted = null;
+				if (data.has("ticker")) {
+					ticker= data.getString("ticker");
+			
+				}*/
+
+				double marketcap = 0;
+				if (data.has("market_cap")) {
+					marketcap = data.getDouble("market_cap");
+				}
+				long sharesoutstanding = 0;
+				if (data.has("share_class_shares_outstanding")) {
+					sharesoutstanding = data.getLong("share_class_shares_outstanding");
+				}
+				String category = null;
+				if (data.has("sic_description")) {
+					category= data.getString("sic_description");
+			
+				}
+				double sharesoutstandingavg = 0;
+				if (data.has("weighted_shares_outstanding")) {
+					sharesoutstandingavg = data.getInt("weighted_shares_outstanding");
+				}
+
+	
+			
+				preparedStatement.setString(1, ticker);
+				preparedStatement.setDate(2, listdatesql);
+				preparedStatement.setDouble(3, marketcap);
+				preparedStatement.setLong(4, sharesoutstanding);
+				preparedStatement.setString(5, category);
+				preparedStatement.setDouble(6, sharesoutstandingavg);
+				
+				preparedStatement.addBatch();
+
+			}
+			preparedStatement.executeBatch();
+			System.out.println("Finsished");
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+}

@@ -1,0 +1,87 @@
+package Persistence;
+
+import java.net.http.HttpResponse;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Time;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneOffset;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import Data.Datacollection;
+import UserDefinedClasses.StockIntraDayPrices;
+import UserDefinedClasses.StockPrices;
+import stockmarkethistoryapi.AllTickersAPI;
+
+public class StoringAllTickers {
+	String jdbcUrl;
+	String username;
+	String password;
+
+	public StoringAllTickers() {
+		super();
+		this.jdbcUrl = "jdbc:postgresql://localhost:5432/stocks";
+		this.username = "postgres";
+		this.password = "stocks";
+
+	}
+
+	public void storeAllTickers(String url) {
+		String response=AllTickersAPI.getAllTickers(url);
+		String sql = "INSERT INTO alltickers (active,ticker) VALUES(?,?);";
+
+		try (Connection connection = DriverManager.getConnection(jdbcUrl, username, password)) {
+
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+			JSONObject res = new JSONObject(response);
+
+			// Extract the array of historical stock data
+			JSONArray results = res.getJSONArray("results");
+			String nexturl = res.getString("next_url");
+		
+
+			// Iterate over each entry in the historical stock data array
+			for (int i = 0; i < results.length(); i++) {
+				JSONObject data = results.getJSONObject(i);
+
+			boolean active = false;
+				if (data.has("active")) {
+					 active = data.getBoolean("active");
+					 System.out.println(active);
+			
+				}
+
+				String ticker = null;
+				if (data.has("ticker")) {
+					ticker = data.getString("ticker");
+				}
+
+				preparedStatement.setBoolean(1, active);
+				preparedStatement.setString(2, ticker);
+				
+
+				preparedStatement.addBatch();
+
+			}
+			preparedStatement.executeBatch();
+			StoringAllTickers so=new StoringAllTickers();
+		String next=nexturl+"&apiKey=tEboLkojLxgaz2hAj83wTQZIG1te0iLT";
+			
+		so.storeAllTickers(next);
+			System.out.println("Finsished");
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+}

@@ -1,0 +1,57 @@
+package Persistence;
+
+import java.net.http.HttpResponse;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Time;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneOffset;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import Data.Datacollection;
+import UserDefinedClasses.StockIntraDayPrices;
+import UserDefinedClasses.StockPrices;
+import stockmarkethistoryapi.AllTickersAPI;
+
+public class GetAllTickers {
+
+	public static void getAllTickers() {
+	
+
+	
+
+		String jdbcUrl = "jdbc:postgresql://localhost:5432/stocks";
+			String username = "postgres";
+			String password = "stocks";
+		String sql = "select distinct ticker from alltickers;";
+
+		try (Connection connection = DriverManager.getConnection(jdbcUrl, username, password)) {
+
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+		
+
+				ResultSet results=preparedStatement.getResultSet();
+			while(results.next()) {
+				String ticker=results.getString("ticker");
+			System.out.println(tickers);	
+			}
+			
+
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+}
+

@@ -1,0 +1,69 @@
+package WebServices;
+
+import java.sql.Date;
+import java.sql.Time;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneOffset;
+
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import com.google.gson.*;
+
+
+import UserDefinedClasses.StockIntraDayPrices;
+
+
+public class ProcessMsg{
+
+	public static void process(String response) {
+
+	       JSONArray jsonArray = new JSONArray(response);
+	       
+
+           // Extract the first object from the array
+           JSONObject jsonObject = jsonArray.getJSONObject(0);
+
+         // Extract data
+         for (int i = 0; i < jsonArray.length(); i++) {
+             JSONObject result = jsonArray.getJSONObject(i);
+             
+             int millisec=jsonArray.getJSONObject(i).getInt("e");
+           
+             Instant instant = Instant.ofEpochMilli(millisec);
+             LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, ZoneOffset.UTC);
+
+             LocalDate localDate = localDateTime.toLocalDate();
+             LocalTime localTime = localDateTime.toLocalTime();
+             
+             java.sql.Date date=Date.valueOf(localDate);
+             java.sql.Time time=Time.valueOf(localTime);
+             
+             String symbol = jsonArray.getJSONObject(i).getString("sym"); 
+             double tickopen = jsonArray.getJSONObject(i).getDouble("o"); // Open
+             double tickhigh = jsonArray.getJSONObject(i).getDouble("h"); // High
+             double ticklow = jsonArray.getJSONObject(i).getDouble("l"); // Low
+             double tickclose = jsonArray.getJSONObject(i).getDouble("c"); // Close
+             long tickvol=jsonArray.getJSONObject(i).getLong("v");
+             double tickavgvolprice=jsonArray.getJSONObject(i).getDouble("vw");
+             long tickavgvolsize=jsonArray.getJSONObject(i).getLong("z");
+             double todayopen=jsonArray.getJSONObject(i).getDouble("op");
+          
+             double todayavgvolprice=jsonArray.getJSONObject(i).getDouble("a");
+             long todayaccvol=jsonArray.getJSONObject(i).getLong("av");
+            
+   
+             Data.Datacollection.INTRADAY_ARRAY.offer(new StockIntraDayPrices(localDate,localTime, symbol,tickopen,
+            		tickhigh, ticklow, tickclose,tickvol, tickavgvolprice,
+			tickavgvolsize,todayopen ,todayavgvolprice , todayaccvol));
+             // Print or process the extracted data
+             System.out.println("Date: " + date + ", Open: " + tickopen + ", High: " + tickhigh + ", Low: " + ticklow + ", Close: " + tickclose);
+         }
+		
+	}
+	}
+

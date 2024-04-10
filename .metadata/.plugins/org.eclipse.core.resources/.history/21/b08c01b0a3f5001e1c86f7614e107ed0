@@ -1,0 +1,41 @@
+
+import java.util.ArrayList;
+
+import Persistence.GetAllTickers;
+import Persistence.StoringAllTickers;
+import Persistence.StoringStockPricesDaily;
+import Persistence.StoringTickerDetails;
+
+import stockmarkethistoryapi.AllTickersAPI;
+import stockmarkethistoryapi.StockpriceshistoryAPI;
+import stockmarkethistoryapi.TickerDetailsAPI;
+import websocket.ConnectingWebSocketStocks;
+
+public class MainClass {
+
+	public static void main(String[] args) {
+/*ConnectingWebSocketStocks.connect();
+StoringStockPrices store=new StoringStockPrices();
+new Thread(store).start();*/
+		
+		/*String history = StockpriceshistoryAPI.getHistory("NVDA","2023-05-02","2024-02-07");
+		StoringStockPricesDaily store=new StoringStockPricesDaily();
+		store.storeDailyPrices(history);*/
+		//CreateTables.createTableStockPrices();
+		//GetAllTickers.getAllTickers();
+	//String stringres=TickerDetailsAPI.getTickerDetails("NFLX");
+	//StoringTickerDetails storing=new StoringTickerDetails();
+	//storing.storeTickerDetails(stringres);
+		
+		ArrayList<String> allstocks=GetAllTickers.getAllTickers();
+		StoringTickerDetails storingDetails=new StoringTickerDetails();
+		
+		for(String stock:allstocks) {
+		String detailsticker=	TickerDetailsAPI.getTickerDetails(stock);
+			boolean valueboolean=storingDetails.storeTickerDetails(detailsticker);
+			
+		}
+	
+	}
+
+}

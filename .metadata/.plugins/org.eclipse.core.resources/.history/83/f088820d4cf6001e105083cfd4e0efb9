@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form onsubmit="sendInput(event)">
+  <label for="items">Choose an item:</label>
+  <select id="items" name="items">
+    <option value="item1">Item 1</option>
+    <option value="item2">Item 2</option>
+    <option value="item3">Item 3</option>
+    <option value="item4">Item 4</option>
+    <option value="item5">Item 5</option>
+  </select>
+  <input type="submit" value="Submit">
+</form>
+<div id="output"></div>
+
+<script>
+    function sendInput(event) {
+        event.preventDefault(); // Prevent the default form submission
+        
+        var inputData = document.getElementById('items').value;
+        console.log(inputData);
+        // Make a POST request using fetch
+        fetch('/add', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'text/plain'
+            },
+            body: inputData
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.text();
+          
+        })
+        .then(data => {
+            // Update the HTML content with the processed data
+            document.getElementById('output').innerText = data;
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+    }
+</script>
+
+</body>
+</html>

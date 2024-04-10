@@ -1,0 +1,37 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
+
+import UserDefinedClasses.StockIntraDayPrices;
+
+public class Datacollection {
+	public static final BlockingQueue<StockIntraDayPrices> INTRADAY_ARRAY = new LinkedBlockingQueue<>();
+	
+	
+	private static String toJson(List<StockIntraDayPrices> stocks) {
+        StringBuilder json = new StringBuilder("[");
+        for (StockIntraDayPrices stock : stocks) {
+            json.append("{");
+            json.append("\"date\": \"").append(stock.getDate()).append("\", ");
+            json.append("\"time\": \"").append(stock.getTime()).append("\", ");
+            json.append("\"stockname\": \"").append(stock.getStockname()).append("\", ");
+            json.append("\"open\": ").append(stock.getTickOpen()).append(", ");
+            json.append("\"high\": ").append(stock.getTickHigh()).append(", ");
+            json.append("\"low\": ").append(stock.getTickLow()).append(", ");
+            json.append("\"close\": ").append(stock.getTickClose()).append(", ");
+            json.append("\"volume\": ").append(stock.getTickVol());
+            json.append("}, ");
+            
+          
+        }
+        if (!stocks.isEmpty()) {
+            json.setLength(json.length() - 2); // Remove trailing comma and space
+        }
+        json.append("]");
+        return json.toString();
+        
+    }
+}
+	

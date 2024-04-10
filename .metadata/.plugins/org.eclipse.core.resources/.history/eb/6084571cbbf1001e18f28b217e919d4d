@@ -1,0 +1,162 @@
+package Persistence;
+
+
+
+import java.net.http.HttpResponse;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Time;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneOffset;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import Data.Datacollection;
+import UserDefinedClasses.StockIntraDayPrices;
+
+
+
+public class StoringStockPricesDaily {
+	String jdbcUrl;
+    String username;
+    String password;
+    
+    
+   public StoringStockPricesDaily() {
+		super();
+		this.jdbcUrl ="jdbc:postgresql://localhost:5432/stocks";
+		this.username = "postgres";
+		this.password ="stocks";
+	}
+
+
+public void storeDailyPrices(String response){
+	String sql = "INSERT INTO stockprices_intraday(date,time,symbol,tick_open,tick_high,tick_low,tick_close,"
+      		+ "tick_vol,tick_volavg_price,tick_avg_size,today_open,today_volavg_price,today_acc_vol) values(?,?,?,?,?,?,?,?,?,?,?,?,?);";
+     
+		
+	
+       try   (Connection connection = DriverManager.getConnection(jdbcUrl, username, password)) {
+    	   
+               PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            
+
+               JSONObject res = new JSONObject(response);
+
+               // Extract the array of historical stock data
+               JSONArray results = res.getJSONArray("results");
+
+               // Iterate over each entry in the historical stock data array
+               for (int i = 0; i < results.length(); i++) {
+                   JSONObject data = results.getJSONObject(i);
+
+                   // Extract the date, open, high, and low values from each entry
+                  
+                   double open = data.getDouble("o");
+                   double high = data.getDouble("h");
+                   double low = data.getDouble("l");
+                   
+                   String ticker=null;
+              if(data.has("ticker")) {
+               ticker=data.getString("ticker");}
+              System.out.println(ticker);
+              
+              int t=0;
+              if(data.has("t")) {
+               t=data.getInt("t");}
+              System.out.println(ticker);
+             /* jsonArray.getJSONObject(i).getString("results");
+              Instant instant = Instant.ofEpochMilli(millisec);
+              LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, ZoneOffset.UTC);
+
+              LocalDate localDate = localDateTime.toLocalDate();
+              LocalTime localTime = localDateTime.toLocalTime();
+              
+              java.sql.Date date=Date.valueOf(localDate);
+              java.sql.Time time=Time.valueOf(localTime);
+              String symbol=null;
+              if(jsonArray.getJSONObject(i).has("sym")) {
+              symbol = jsonArray.getJSONObject(i).getString("sym"); }
+              
+              double tickopen=0;
+              if(jsonArray.getJSONObject(i).has("o")) {
+               tickopen = jsonArray.getJSONObject(i).getDouble("o");} // Open
+              
+              double tickhigh=0;
+              if(jsonArray.getJSONObject(i).has("h")) {
+              tickhigh = jsonArray.getJSONObject(i).getDouble("h");} // High
+              
+              double ticklow=0;
+              if(jsonArray.getJSONObject(i).has("l")) {
+               ticklow = jsonArray.getJSONObject(i).getDouble("l");} // Low
+              
+              double tickclose=0;
+              if(jsonArray.getJSONObject(i).has("c")) {
+               tickclose = jsonArray.getJSONObject(i).getDouble("c");} // Close
+              
+              long tickvol=0;
+              if(jsonArray.getJSONObject(i).has("v")) {
+               tickvol=jsonArray.getJSONObject(i).getLong("v");}
+              
+              double tickavgvolprice=0;
+              if(jsonArray.getJSONObject(i).has("vw")) {
+              tickavgvolprice=jsonArray.getJSONObject(i).getDouble("vw");}
+              
+              long tickavgvolsize=0;
+              if(jsonArray.getJSONObject(i).has("z")) {
+               tickavgvolsize=jsonArray.getJSONObject(i).getLong("z");}
+              
+              double todayopen=0;
+              if(jsonArray.getJSONObject(i).has("op")) {
+               todayopen=jsonArray.getJSONObject(i).getDouble("op");}
+              
+              double todayavgvolprice=0;
+              if(jsonArray.getJSONObject(i).has("a")) {
+               todayavgvolprice=jsonArray.getJSONObject(i).getDouble("a");}
+              
+              long todayaccvol=0;
+              if(jsonArray.getJSONObject(i).has("av")) {
+              todayaccvol=jsonArray.getJSONObject(i).getLong("av");}
+             
+            	
+              	Date datesql=Date.valueOf(intraprice.getDate());
+              	Time timesql=Time.valueOf(intraprice.getTime());
+             
+              preparedStatement.setDate(1, datesql);
+              preparedStatement.setTime(2, timesql);
+              preparedStatement.setString(3, intraprice.getStockname());
+              preparedStatement.setDouble(4, intraprice.getTickOpen());
+              preparedStatement.setDouble(5, intraprice.getTickHigh());
+              preparedStatement.setDouble(6, intraprice.getTickLow());
+              preparedStatement.setDouble(7, intraprice.getTickClose());
+              preparedStatement.setLong(8, intraprice.getTickVol());
+              preparedStatement.setDouble(9, intraprice.getTickVolAvgPrice());
+              preparedStatement.setLong(10, intraprice.getTickAvgTradeSize());
+              
+              preparedStatement.setDouble(11, intraprice.getTodayOpen());
+        
+              preparedStatement.setDouble(13, intraprice.getTodayVolAvgPrice());
+              preparedStatement.setLong(12, intraprice.getAccvol());
+
+              preparedStatement.addBatch();
+    
+              System.out.println("Counter in StoringStockPrices: "+Datacollection.COUNTER);
+              
+     
+               }
+              preparedStatement.executeBatch();
+              System.out.println("Finsished");*/
+            
+               } } catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+   }
+   }

@@ -1,0 +1,30 @@
+package FrontSide;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+	
+	@WebServlet("/add")
+	public class Add extends HttpServlet {
+	    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	        // Get input data from request body
+	       // String processedData = request.getReader().lines().reduce("", (accumulator, actual) -> accumulator + actual);
+	        String processedData2 = request.getReader().readLine();
+	        String newstring=processedData2+" das ist Dein Name.";
+	        
+	        // Set response content type
+	        response.setContentType("text/plain");
+	        
+	        // Send the processed data back to the client
+	
+	        response.getWriter().write(newstring);
+	      
+	    }
+	
+
+}

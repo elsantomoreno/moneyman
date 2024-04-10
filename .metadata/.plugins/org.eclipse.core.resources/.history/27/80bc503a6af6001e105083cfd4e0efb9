@@ -1,0 +1,156 @@
+package Data;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.ArrayDeque;
+import java.util.Date;
+import java.util.List;
+import java.util.Queue;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.stream.Collectors;
+
+import UserDefinedClasses.StockIntraDayPrices;
+import UserDefinedClasses.StockPrices;
+
+public class Datacollection {
+	public static final BlockingQueue<StockIntraDayPrices> INTRADAY_ARRAY = new LinkedBlockingQueue<>();
+
+	public static final Queue<StockPrices> MA_QUEUE = new ArrayDeque<>();
+	
+	public static double getMA(int number) {
+		return MA_QUEUE.stream().skip(Math.max(0,Data.Datacollection.MA_QUEUE.size() - number))
+        .collect(Collectors.toList()).stream().mapToDouble(a->a.getClose()).average().orElse(0);
+		
+	}
+	
+	public static double getAvgVoldays(int days) {
+		return MA_QUEUE.stream().skip(Math.max(0,Data.Datacollection.MA_QUEUE.size() - days))
+        .collect(Collectors.toList()).stream().mapToDouble(a->a.getVol()).average().orElse(0);
+		
+	}
+
+
+	public static java.sql.Date getSQLDate(String dateString) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		java.sql.Date sqlDate = null;
+		try {
+			java.util.Date utilDate = sdf.parse(dateString);
+			sqlDate = new java.sql.Date(utilDate.getTime());
+
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		return sqlDate;
+	}
+
+	public static String getSQLDateString(int years) {
+		
+		LocalDate localDatenow = LocalDate.now();
+		LocalDate localdate=localDatenow.minusYears(years);
+		int dayofmonth = localdate.getDayOfMonth();
+		String daystring=String.valueOf(dayofmonth);
+		if(dayofmonth<10)daystring="0"+daystring;
+		int month = localdate.getMonthValue();
+		String monthstring=String.valueOf(month);
+		if(month<10)monthstring="0"+monthstring;
+		int year = localdate.getYear();
+		String startdatestring = year + "-" + monthstring + "-" + daystring;
+		
+		return startdatestring;
+
+	}
+
+
+
+	public static double getSD(int days) {
+		double average =getMA(30);
+
+		// Calculate the variance of the last 200 elements
+		double variance =MA_QUEUE.stream()
+                .skip(Math.max(0, MA_QUEUE.size() - days))
+                .mapToDouble(a -> Math.pow(a.getClose() - average, 2))
+                .average()
+                .orElse(0.0);;
+
+		// Calculate the standard deviation
+		return Math.sqrt(variance);
+	}
+
+	public static int COUNTER = 0;
+
+	private static String toJson(List<StockIntraDayPrices> stocks) {
+		StringBuilder json = new StringBuilder("[");
+		for (StockIntraDayPrices stock : stocks) {
+			json.append("{");
+			json.append("\"date\": \"").append(stock.getDate()).append("\", ");
+			json.append("\"time\": \"").append(stock.getTime()).append("\", ");
+			json.append("\"stockname\": \"").append(stock.getStockname()).append("\", ");
+			json.append("\"open\": ").append(stock.getTickOpen()).append(", ");
+			json.append("\"high\": ").append(stock.getTickHigh()).append(", ");
+			json.append("\"low\": ").append(stock.getTickLow()).append(", ");
+			json.append("\"close\": ").append(stock.getTickClose()).append(", ");
+			json.append("\"volume\": ").append(stock.getTickVol());
+			json.append("}, ");
+
+		}
+		if (!stocks.isEmpty()) {
+			json.setLength(json.length() - 2); // Remove trailing comma and space
+		}
+		json.append("]");
+		return json.toString();
+
+	}
+	private static String toJson(StockPrices stock) {
+		StringBuilder json = new StringBuilder("[");
+		private Date date;
+		private String symbol;
+		private double open;
+		private double high;
+		private double low;
+		private double close;
+		private double 
+		private double 
+		private double ma10;
+		private double ma21;
+		private double ma50;
+		private double ma200;
+		private double avgvol10days;
+		private double avgvol30days;
+		private double sd;
+		private double week52high;
+		private double week52low;
+		private Date date52high;
+		private Date date52low;
+			json.append("{");
+			json.append("\"date\": \"").append(stock.getDate()).append("\", ");
+			json.append("\"stockname\": \"").append(stock.getSymbol()).append("\", ");
+			json.append("\"open\": ").append(stock.getOpen()).append(", ");
+			json.append("\"high\": ").append(stock.getHigh()).append(", ");
+			json.append("\"low\": ").append(stock.getLow()).append(", ");
+			json.append("\"close\": ").append(stock.getClose()).append(", ");
+			json.append("\"vol\": ").append(stock.getVol()).append(", ");
+			
+			json.append("\"volavgprice\": ").append(stock.getVolavgprice()).append(", ");
+			json.append("\"ma10\": ").append(stock.getClose()).append(", ");
+			json.append("\"ma21\": ").append(stock.getClose()).append(", ");
+			json.append("\"ma50\": ").append(stock.getClose()).append(", ");
+			json.append("\"ma200\": ").append(stock.getClose()).append(", ");
+			json.append("\"close\": ").append(stock.getClose()).append(", ");
+			json.append("\"close\": ").append(stock.getClose()).append(", ");
+			json.append("\"close\": ").append(stock.getClose()).append(", ");
+			json.append("\"volume\": ").append(stock.getVol());
+			json.append("}, ");
+
+		
+		if (!stocks.isEmpty()) {
+			json.setLength(json.length() - 2); // Remove trailing comma and space
+		}
+		json.append("]");
+		return json.toString();
+
+	}
+
+}

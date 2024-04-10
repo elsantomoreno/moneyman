@@ -1,0 +1,7 @@
+package databaseinitialization;
+
+public class CreateTables {
+	String sqlsta="CREATE TABLE IF NOT EXISTS stockprices (date DATE, ticker VARCHAR(6), open DOUBLE PRECISION, high DOUBLE PRECISION, low DOUBLE PRECISION, close DOUBLE PRECISION, volvol INT, volavgprice DOUBLE PRECISION, ma10 DOUBLE PRECISION, ma21 DOUBLE PRECISION, ma50 DOUBLE PRECISION, ma200 DOUBLE PRECISION, avgvol10days DOUBLE PRECISION, avgvol30days DOUBLE PRECISION, sd DOUBLE PRECISION, PRIMARY KEY (date, ticker), INDEX idx_date (date));";
+
+
+}

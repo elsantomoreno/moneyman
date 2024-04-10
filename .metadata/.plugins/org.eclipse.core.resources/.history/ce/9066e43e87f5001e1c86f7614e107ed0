@@ -1,0 +1,37 @@
+package databaseinitialization;
+
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import UserDefinedClasses.StockPrices;
+
+public class CreateTables {
+	public static void createTableStockPrices() {
+		String jdbcUrl = "jdbc:postgresql://localhost:5432/stocks";
+		String username = "postgres";
+		String password = "stocks";
+
+		//String sqlsta = "CREATE TABLE IF NOT EXISTS stockprices (date DATE, ticker VARCHAR(6), open DOUBLE PRECISION, high DOUBLE PRECISION, low DOUBLE PRECISION, close DOUBLE PRECISION, volvol INT, volavgprice DOUBLE PRECISION, ma10 DOUBLE PRECISION, ma21 DOUBLE PRECISION, ma50 DOUBLE PRECISION, ma200 DOUBLE PRECISION, avgvol10days DOUBLE PRECISION, avgvol30days DOUBLE PRECISION,sd DOUBLE PRECISION, PRIMARY KEY (date, ticker),FOREIGN KEY (ticker) REFERENCES tickersdetails(ticker));";
+		/*String sqlsta="CREATE TABLE tickersdetails(active BOOLEAN,ticker VARCHAR(6),list_date DATE,delisted_utc DATE,market_cap Numeric(20,2),shares_outstanding NUMERIC(20, 0)"
+				+ ",sic_description VARCHAR(30),weighted_shares_outstanding Numeric(20,2),PRIMARY KEY(ticker))";*/
+		String sqlsta="CREATE TABLE IF NOT EXISTS alltickers(active BOOLEAN,ticker VARCHAR(15));";
+		try (Connection connection = DriverManager.getConnection(jdbcUrl, username, password)) {
+
+			PreparedStatement preparedStatement = connection.prepareStatement(sqlsta);
+
+		preparedStatement.execute();
+
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+}

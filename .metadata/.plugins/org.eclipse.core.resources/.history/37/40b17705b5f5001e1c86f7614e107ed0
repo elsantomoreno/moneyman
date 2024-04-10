@@ -1,0 +1,55 @@
+
+import java.sql.Date;
+import java.time.LocalDate;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Queue;
+import java.util.stream.Collectors;
+
+import Data.Datacollection;
+import Persistence.GetAllTickers;
+import Persistence.StoringAllTickers;
+import Persistence.StoringStockPricesDaily;
+import Persistence.StoringTickerDetails;
+import UserDefinedClasses.StockPrices;
+import stockmarkethistoryapi.AllTickersAPI;
+import stockmarkethistoryapi.StockpriceshistoryAPI;
+import stockmarkethistoryapi.TickerDetailsAPI;
+import websocket.ConnectingWebSocketStocks;
+
+public class MainClass {
+
+	public static void main(String[] args) {
+/*ConnectingWebSocketStocks.connect();
+StoringStockPrices store=new StoringStockPrices();
+new Thread(store).start();*/
+		
+		/*ArrayList<String> stocks=GetAllTickers.getAllTickers();
+		LocalDate localDate=LocalDate.now();
+		for(String stock:stocks) {
+		//String history = StockpriceshistoryAPI.getHistory(stock,Datacollection.getSQLDateString(localDate, 5),Datacollection.getSQLDateString(localDate, 0));
+		String history = StockpriceshistoryAPI.getHistory(stock,"2020-11-05","2024-04-08");
+		
+		StoringStockPricesDaily store=new StoringStockPricesDaily();
+		store.storeDailyPrices(history);}*/
+		
+		java.sql.Date date=new Date(546167646436548967l);
+		Data.Datacollection.MA_QUEUE.add(new StockPrices(date, "NFLF", 2.5, 12.5, 56.6, 85, 256325l,
+				853, 0, 0, 0, 0, 0, 0, 0, 0, 0, null, null));
+		Data.Datacollection.MA_QUEUE.add(new StockPrices(date, "NFLF", 2.8, 12.5, 56.6, 85, 256325l,
+				853, 0, 0, 0, 0, 0, 0, 0, 0, 0, null, null));
+		Data.Datacollection.MA_QUEUE.add(new StockPrices(date, "NFLF", 2.9, 12.5, 56.6, 85, 256325l,
+				853, 0, 0, 0, 0, 0, 0, 0, 0, 0, null, null));
+		Data.Datacollection.MA_QUEUE.add(new StockPrices(date, "NFLF", 50, 12.5, 56.6, 85, 256325l,
+				853, 0, 0, 0, 0, 0, 0, 0, 0, 0, null, null));
+		Data.Datacollection.MA_QUEUE.add(new StockPrices(date, "NFLF", 70, 12.5, 56.6, 85, 256325l,
+				853, 0, 0, 0, 0, 0, 0, 0, 0, 0, null, null));
+		double avg=Datacollection.getMA(3);
+		System.out.println(avg);
+		
+	
+		
+	
+	}
+
+}

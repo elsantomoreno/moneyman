@@ -1,0 +1,106 @@
+package Data;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.ArrayDeque;
+import java.util.List;
+import java.util.Queue;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.stream.Collectors;
+
+import UserDefinedClasses.StockIntraDayPrices;
+import UserDefinedClasses.StockPrices;
+
+public class Datacollection {
+	public static final BlockingQueue<StockIntraDayPrices> INTRADAY_ARRAY = new LinkedBlockingQueue<>();
+
+	public static final Queue<StockPrices> MA_QUEUE = new ArrayDeque<>();
+	
+	public static double getMA(int number) {
+		return MA_QUEUE.stream().skip(Math.max(0,Data.Datacollection.MA_QUEUE.size() - number))
+        .collect(Collectors.toList()).stream().mapToDouble(a->a.getClose()).average().orElse(0);
+		
+	}
+	
+	public static double getAvgVoldays(int days) {
+		return MA_QUEUE.stream().skip(Math.max(0,Data.Datacollection.MA_QUEUE.size() - days))
+        .collect(Collectors.toList()).stream().mapToDouble(a->a.getVol()).average().orElse(0);
+		
+	}
+
+
+	public static java.sql.Date getSQLDate(String dateString) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		java.sql.Date sqlDate = null;
+		try {
+			java.util.Date utilDate = sdf.parse(dateString);
+			sqlDate = new java.sql.Date(utilDate.getTime());
+
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		return sqlDate;
+	}
+
+	public static String getSQLDateString(int years) {
+		
+		LocalDate localDatenow = LocalDate.now();
+		LocalDate localdate=localDatenow.minusYears(years);
+		int dayofmonth = localdate.getDayOfMonth();
+		String daystring=String.valueOf(dayofmonth);
+		if(dayofmonth<10)daystring="0"+daystring;
+		int month = localdate.getMonthValue();
+		String monthstring=String.valueOf(month);
+		if(month<10)monthstring="0"+monthstring;
+		int year = localdate.getYear();
+		String startdatestring = year + "-" + monthstring + "-" + daystring;
+		
+		return startdatestring;
+
+	}
+
+
+
+	public static double getSD(int days) {
+		double average =getMA(30);
+
+		// Calculate the variance of the last 200 elements
+		double variance =MA_QUEUE.stream()
+                .skip(Math.max(0, MA_QUEUE.size() - days))
+                .mapToDouble(a -> Math.pow(a.getClose() - average, 2))
+                .average()
+                .orElse(0.0);;
+
+		// Calculate the standard deviation
+		return Math.sqrt(variance);
+	}
+
+	public static int COUNTER = 0;
+
+	private static String toJson(List<StockIntraDayPrices> stocks) {
+		StringBuilder json = new StringBuilder("[");
+		for (StockIntraDayPrices stock : stocks) {
+			json.append("{");
+			json.append("\"date\": \"").append(stock.getDate()).append("\", ");
+			json.append("\"time\": \"").append(stock.getTime()).append("\", ");
+			json.append("\"stockname\": \"").append(stock.getStockname()).append("\", ");
+			json.append("\"open\": ").append(stock.getTickOpen()).append(", ");
+			json.append("\"high\": ").append(stock.getTickHigh()).append(", ");
+			json.append("\"low\": ").append(stock.getTickLow()).append(", ");
+			json.append("\"close\": ").append(stock.getTickClose()).append(", ");
+			json.append("\"volume\": ").append(stock.getTickVol());
+			json.append("}, ");
+
+		}
+		if (!stocks.isEmpty()) {
+			json.setLength(json.length() - 2); // Remove trailing comma and space
+		}
+		json.append("]");
+		return json.toString();
+
+	}
+
+}

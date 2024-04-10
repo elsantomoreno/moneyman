@@ -1,0 +1,45 @@
+package Data;
+
+import java.util.ArrayDeque;
+import java.util.List;
+import java.util.Queue;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
+
+import UserDefinedClasses.StockIntraDayPrices;
+import UserDefinedClasses.StockPrices;
+
+public class Datacollection {
+public static final BlockingQueue<StockIntraDayPrices> INTRADAY_ARRAY = new LinkedBlockingQueue<>();
+
+public static final Queue<StockPrices> MA_QUEUE = new ArrayDeque<>();
+public static double getMA(int days) {
+	return Data.Datacollection.MA_QUEUE.stream().skip(Data.Datacollection.MA_QUEUE.size() - days)
+			.mapToDouble(p->p.getClose()).average().orElse(0);
+}
+public static int COUNTER=0;
+	private static String toJson(List<StockIntraDayPrices> stocks) {
+        StringBuilder json = new StringBuilder("[");
+        for (StockIntraDayPrices stock : stocks) {
+            json.append("{");
+            json.append("\"date\": \"").append(stock.getDate()).append("\", ");
+            json.append("\"time\": \"").append(stock.getTime()).append("\", ");
+            json.append("\"stockname\": \"").append(stock.getStockname()).append("\", ");
+            json.append("\"open\": ").append(stock.getTickOpen()).append(", ");
+            json.append("\"high\": ").append(stock.getTickHigh()).append(", ");
+            json.append("\"low\": ").append(stock.getTickLow()).append(", ");
+            json.append("\"close\": ").append(stock.getTickClose()).append(", ");
+            json.append("\"volume\": ").append(stock.getTickVol());
+            json.append("}, ");
+            
+          
+        }
+        if (!stocks.isEmpty()) {
+            json.setLength(json.length() - 2); // Remove trailing comma and space
+        }
+        json.append("]");
+        return json.toString();
+        
+    }
+
+}

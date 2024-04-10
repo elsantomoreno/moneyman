@@ -1,0 +1,17 @@
+package databaseinitialization;
+
+import Persistence.StoringAllTickers;
+
+public class CreatingTablesAndValues {
+	public static void creatingTablesandValues() {
+		//Create all tables for the DataBase
+		CreateAllDBTables createall=new CreateAllDBTables();
+		createall.createTableStockPrices();
+		//Create all Tickers:common stocks
+		String url="https://api.polygon.io/v3/reference/tickers?type=CS&market=stocks&apiKey=tEboLkojLxgaz2hAj83wTQZIG1te0iLT";
+		StoringAllTickers so=new StoringAllTickers();
+		so.storeAllTickers(url);
+		
+	}
+
+}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form onsubmit="sendInput(event)">
+  <label for="stocks">Choose an item:</label>
+  <select id="stockkey" name="stocks">
+    <option value="ONYX">ONYX</option>
+    <option value="INBS">INBS</option>
+    <option value="HUGE">HUGE</option>
+  
+  </select>
+  <input type="submit" value="Submit">
+</form>
+<div id="output"></div>
+
+<script>
+    function sendInput(event) {
+        event.preventDefault(); // Prevent the default form submission
+        
+        let stocknamestring = document.getElementById('stockkey').value;
+      let stockname = JSON.stringify({ticker:stocknamestring});
+        // Make a POST request using fetch
+        console.log(stockname);
+        fetch('/add', {
+            method: 'POST',
+            headers: {
+            	'Content-Type': 'application/json'
+            },
+            body: stockname
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+          
+        })
+        .then(data => {
+            // Update the HTML content with the processed data
+            console.log(data);
+            document.getElementById('output').innerText = data;
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+    }
+</script>
+
+</body>
+</html>

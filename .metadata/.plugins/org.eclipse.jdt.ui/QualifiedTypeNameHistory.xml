@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="Collections.Collections"/>
+    <fullyQualifiedTypeName name="UserDefinedClasses.StockIntraDayPrices"/>
+    <fullyQualifiedTypeName name="Collection.Versuch"/>
+    <fullyQualifiedTypeName name="WebServices.ConnectingWebSocketStocks"/>
+    <fullyQualifiedTypeName name="stockmarkethistory.StockpriceshistoryAPI"/>
+    <fullyQualifiedTypeName name="databaseinitialization.CreateTables"/>
+    <fullyQualifiedTypeName name="stockmarkethistoryapi.AllTickersAPI"/>
+    <fullyQualifiedTypeName name="Persistence.StoringAllTickers"/>
+    <fullyQualifiedTypeName name="Persistence.StoringTickerDetails"/>
+    <fullyQualifiedTypeName name="Persistence.GetAllTickers"/>
+    <fullyQualifiedTypeName name="stockmarkethistoryapi.TickerDetailsAPI"/>
+    <fullyQualifiedTypeName name="java.time.LocalDate"/>
+    <fullyQualifiedTypeName name="java.sql.Date"/>
+    <fullyQualifiedTypeName name="databaseinitialization.CreateAllDBTables"/>
+    <fullyQualifiedTypeName name="databaseinitialization.CreatingTablesAndValues"/>
+    <fullyQualifiedTypeName name="Data.Datacollection"/>
+    <fullyQualifiedTypeName name="Persistence.GetPriceHistory"/>
+</qualifiedTypeNameHistroy>
