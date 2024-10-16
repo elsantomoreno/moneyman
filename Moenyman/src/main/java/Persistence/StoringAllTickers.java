@@ -22,15 +22,11 @@ import UserDefinedClasses.StockPrices;
 import stockmarkethistoryapi.AllTickersAPI;
 
 public class StoringAllTickers {
-	String jdbcUrl;
-	String username;
-	String password;
+
 
 	public StoringAllTickers() {
 		super();
-		this.jdbcUrl = "jdbc:postgresql://localhost:5432/stocks";
-		this.username = "postgres";
-		this.password = "stocks";
+
 
 	}
 
@@ -38,7 +34,7 @@ public class StoringAllTickers {
 		String response=AllTickersAPI.getAllTickers(url);
 		String sql = "INSERT INTO alltickers (active,ticker) VALUES(?,?);";
 
-		try (Connection connection = DriverManager.getConnection(jdbcUrl, username, password)) {
+		try (Connection connection = DriverManager.getConnection(CredentialsPostGres.jdbcUrl, CredentialsPostGres.username, CredentialsPostGres.password)) {
 
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 

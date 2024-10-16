@@ -11,12 +11,11 @@ import UserDefinedClasses.StockPrices;
 public class GetPriceHistory {
 	public static StockPrices gethistory(String stock) {
 	
-		String jdbcUrl = "jdbc:postgresql://localhost:5432/stocks";
-		String username = "postgres";
-		String password = "stocks";
+
 		String sql = "select* from stockprices where ticker='"+stock+"'";
+
 		StockPrices	 stockprices=null;
-		try (Connection connection = DriverManager.getConnection(jdbcUrl, username, password)) {
+		try (Connection connection = DriverManager.getConnection(CredentialsPostGres.jdbcUrl, CredentialsPostGres.username, CredentialsPostGres.password)) {
 			System.out.println(connection.toString());
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.executeQuery();

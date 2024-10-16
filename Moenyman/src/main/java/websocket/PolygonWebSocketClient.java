@@ -24,6 +24,7 @@ public class PolygonWebSocketClient extends WebSocketClient {
 
     @Override
     public void onMessage(String message) {
+        //System.out.println(message);
     	ProcessMsg.process(message);
 
     

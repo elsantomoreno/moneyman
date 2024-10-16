@@ -21,23 +21,15 @@ import UserDefinedClasses.StockIntraDayPrices;
 import UserDefinedClasses.StockPrices;
 
 public class StoringTickerDetails {
-	String jdbcUrl;
-	String username;
-	String password;
 
-	public StoringTickerDetails() {
-		super();
-		this.jdbcUrl = "jdbc:postgresql://localhost:5432/stocks";
-		this.username = "postgres";
-		this.password = "stocks";
 
-	}
 
-	public Boolean storeTickerDetails(String response) {
+
+	public static Boolean storeTickerDetails(String response) {
 		
 		String sql = "INSERT INTO tickersdetails (ticker,list_date,market_cap,shares_outstanding,sic_description,sic_code,weighted_shares_outstanding) values(?,?,?,?,?,?,?);";
 
-		try (Connection connection = DriverManager.getConnection(jdbcUrl, username, password)) {
+		try (Connection connection = DriverManager.getConnection(CredentialsPostGres.jdbcUrl, CredentialsPostGres.username, CredentialsPostGres.password)) {
 
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 

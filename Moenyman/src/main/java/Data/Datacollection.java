@@ -19,17 +19,6 @@ public class Datacollection {
 
 	public static final Queue<StockPrices> MA_QUEUE = new ArrayDeque<>();
 	
-	public static double getMA(int number) {
-		return MA_QUEUE.stream().skip(Math.max(0,Data.Datacollection.MA_QUEUE.size() - number))
-        .collect(Collectors.toList()).stream().mapToDouble(a->a.getClose()).average().orElse(0);
-		
-	}
-	
-	public static double getAvgVoldays(int days) {
-		return MA_QUEUE.stream().skip(Math.max(0,Data.Datacollection.MA_QUEUE.size() - days))
-        .collect(Collectors.toList()).stream().mapToDouble(a->a.getVol()).average().orElse(0);
-		
-	}
 
 
 	public static java.sql.Date getSQLDate(String dateString) {
@@ -65,13 +54,12 @@ public class Datacollection {
 
 
 
-	public static double getSD(int days) {
-		double average =getMA(30);
+	public static double getSD(Queue<Double> queue) {
+		double average =queue.stream().mapToDouble(a->a).average().getAsDouble();
 
 		// Calculate the variance of the last 200 elements
-		double variance =MA_QUEUE.stream()
-                .skip(Math.max(0, MA_QUEUE.size() - days))
-                .mapToDouble(a -> Math.pow(a.getClose() - average, 2))
+		double variance =queue.stream()
+                .mapToDouble(a -> Math.pow(a- average, 2))
                 .average()
                 .orElse(0.0);;
 

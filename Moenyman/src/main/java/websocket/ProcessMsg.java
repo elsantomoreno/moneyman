@@ -2,11 +2,8 @@ package websocket;
 
 import java.sql.Date;
 import java.sql.Time;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.ZoneOffset;
+import java.time.*;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -27,18 +24,16 @@ public class ProcessMsg{
          // Extract data
          for (int i = 0; i < jsonArray.length(); i++) {
              JSONObject result = jsonArray.getJSONObject(i);
-             int millisec=0;
+             long millisec=0;
              if(jsonArray.getJSONObject(i).has("sym")) {
-              millisec=jsonArray.getJSONObject(i).getInt("e");}
-           
-             Instant instant = Instant.ofEpochMilli(millisec);
-             LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, ZoneOffset.UTC);
+              millisec=jsonArray.getJSONObject(i).getLong("e");}
 
+             Instant instant = Instant.ofEpochMilli(millisec);
+             ZoneId newYorkZoneId = ZoneId.of("America/New_York");
+             LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, newYorkZoneId);
              LocalDate localDate = localDateTime.toLocalDate();
              LocalTime localTime = localDateTime.toLocalTime();
-             
-             java.sql.Date date=Date.valueOf(localDate);
-             java.sql.Time time=Time.valueOf(localTime);
+
              String symbol=null;
              if(jsonArray.getJSONObject(i).has("sym")) {
              symbol = jsonArray.getJSONObject(i).getString("sym"); }
@@ -86,9 +81,9 @@ public class ProcessMsg{
    
              Data.Datacollection.INTRADAY_ARRAY.offer(new StockIntraDayPrices(localDate,localTime, symbol,tickopen,
             		tickhigh, ticklow, tickclose,tickvol, tickavgvolprice,
-			tickavgvolsize,todayopen ,todayavgvolprice , todayaccvol));
+			        tickavgvolsize,todayopen ,todayavgvolprice , todayaccvol));
            
-            System.out.println(localTime+" Date: " + date + ", Open: " + tickopen + " Counter: "+Datacollection.COUNTER++);
+           // System.out.println(localTime+" Date: "  + ", Open: " + tickopen + " Counter: "+Datacollection.COUNTER++);
          }
 		
 	}

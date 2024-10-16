@@ -12,12 +12,10 @@ public class GetAllTickers {
 
 	public static ArrayList<String> getAllTickers() {
 		ArrayList<String> allstockslist=new ArrayList<>();
-		String jdbcUrl = "jdbc:postgresql://localhost:5432/stocks";
-		String username = "postgres";
-		String password = "stocks";
+
 		String sql = "select distinct ticker from alltickers;";
 
-		try (Connection connection = DriverManager.getConnection(jdbcUrl, username, password)) {
+		try (Connection connection = DriverManager.getConnection(CredentialsPostGres.jdbcUrl, CredentialsPostGres.username, CredentialsPostGres.password)) {
 			System.out.println(connection.toString());
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.executeQuery();

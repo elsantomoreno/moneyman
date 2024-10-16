@@ -1,148 +1,197 @@
 package Persistence;
 
-import java.net.http.HttpResponse;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Time;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.ZoneOffset;
-
+import Data.Datacollection;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import Data.Datacollection;
-import UserDefinedClasses.StockIntraDayPrices;
-import UserDefinedClasses.StockPrices;
+import java.sql.*;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.util.ArrayDeque;
+import java.util.Queue;
 
 public class StoringStockPricesDaily {
-	String jdbcUrl;
-	String username;
-	String password;
 
-	public StoringStockPricesDaily() {
-		super();
-		this.jdbcUrl = "jdbc:postgresql://localhost:5432/stocks";
-		this.username = "postgres";
-		this.password = "stocks";
 
-	}
+    public static void storeDailyPrices(String response) {
+        String sql = "INSERT INTO stockprices_daily(date,ticker,open,high,low,close,"
+                + "vol,volavgprice,wh52,wl52,dwh52,dwl52,ma10,ma21,ma50,ma200,avgvol10days,avgvol30days,sd,bolup,boldown,daysinbol) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
 
-	public void storeDailyPrices(String response) {
-		String sql = "INSERT INTO stockprices(date,ticker,open,high,low,close,"
-				+ "vol,volavgprice,ma10,ma21,ma50,ma200,avgvol10days,avgvol30days,sd) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+        try (Connection connection = DriverManager.getConnection(CredentialsPostGres.jdbcUrl, CredentialsPostGres.username, CredentialsPostGres.password)) {
 
-		try (Connection connection = DriverManager.getConnection(jdbcUrl, username, password)) {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
-			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            JSONObject res = new JSONObject(response);
 
-			JSONObject res = new JSONObject(response);
+            // Extract the array of historical stock data
+            JSONArray results = res.getJSONArray("results");
+            String ticker = res.getString("ticker");
 
-			// Extract the array of historical stock data
-			JSONArray results = res.getJSONArray("results");
-			String ticker = res.getString("ticker");
+            // Iterate over each entry in the historical stock data array
+            Queue<Double> queue10 = new ArrayDeque<>();
+            Queue<Double> queue21 = new ArrayDeque<>();
+            Queue<Double> queue30 = new ArrayDeque<>();
+            Queue<Double> queue50 = new ArrayDeque<>();
+            Queue<Double> queue200 = new ArrayDeque<>();
+            Queue<Long> vol10days = new ArrayDeque<>();
+            Queue<Long> vol30days = new ArrayDeque<>();
+            Date datesql = null;
+            double open = 0;
+            double high = 0;
+            double low = 0;
+            double close = 0;
+            long vol = 0;
+            double avgvolprice = 0;
+            double wh52 = 0;
+            double wl52 = 2845928375.0;
+            Date datesql52wh = null;
+            Date datesql52wl = null;
+            double priceMA10 = 0;
+            double priceMA21 = 0;
+            double priceMA50 = 0;
+            double priceMA200 = 0;
+            double avgvol10days = 0;
+            double avgvol30days = 0;
+            double sd = 0;
+            double bolup = 0;
+            double boldown = 0;
+            int daysinbol = 0;
 
-			// Iterate over each entry in the historical stock data array
-			for (int i = 0; i < results.length(); i++) {
-				JSONObject data = results.getJSONObject(i);
 
-				java.sql.Date datesql = null;
-				if (data.has("t")) {
-					long t = data.getLong("t");
+            for (int i = 0; i < results.length(); i++) {
 
-					Instant instant = Instant.ofEpochMilli(t);
-					LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, ZoneOffset.systemDefault());
-					LocalDate date = localDateTime.toLocalDate();
-					datesql = Date.valueOf(date);
+                JSONObject data = results.getJSONObject(i);
 
-				}
 
-				double open = 0;
-				if (data.has("o")) {
-					open = data.getInt("o");
-				}
+                if (data.has("t")) {
+                    long t = data.getLong("t");
 
-				double high = 0;
-				if (data.has("h")) {
-					high = data.getInt("h");
-				}
+                    Instant instant = Instant.ofEpochMilli(t);
+                    LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, ZoneOffset.systemDefault());
+                    LocalDate date = localDateTime.toLocalDate();
+                    datesql = Date.valueOf(date);
 
-				double low = 0;
-				if (data.has("l")) {
-					low = data.getInt("l");
-				}
 
-				double close = 0;
-				if (data.has("c")) {
-					close = data.getInt("c");
-				}
+                }
 
-				long vol = 0;
-				if (data.has("v")) {
-					vol = data.getInt("v");
-				}
 
-				double avgvolprice = 0;
-				if (data.has("vw")) {
-					avgvolprice = data.getInt("vw");
-				}
+                if (data.has("o")) {
+                    open = data.getInt("o");
+                }
 
-				Data.Datacollection.MA_QUEUE.offer(new StockPrices(datesql, ticker, open, high, low, close, vol,
-						avgvolprice, 0, 0, 0, 0, 0, 0, 0, 0, 0, null, null));
-System.out.println(datesql+"open: "+open+" high: "+high+" low: "+low+" close: "+close+" volume: "+vol);
-				double ma10 = Datacollection.getMA(10);
-				double ma21 = Datacollection.getMA(21);
-				double ma50 = Datacollection.getMA(50);
-				double ma200 = Datacollection.getMA(200);
-				double avgvol10days = Datacollection.getAvgVoldays(10);
-				double avgvol30days = Datacollection.getAvgVoldays(30);
-				double sd = Datacollection.getSD(30);
 
-				StockPrices lastStockPrices = Data.Datacollection.MA_QUEUE.poll();
-				lastStockPrices.setMa10(ma10);
-				lastStockPrices.setMa21(ma21);
-				lastStockPrices.setMa50(ma50);
-				lastStockPrices.setMa200(ma200);
-				lastStockPrices.setAvgvol10days(avgvol10days);
-				lastStockPrices.setAvgvol30days(avgvol30days);
-				lastStockPrices.setSd(sd);
-				lastStockPrices.setWeek52high(high);
-				lastStockPrices.setWeek52low(low);
-				lastStockPrices.setDate52high(datesql);
-				lastStockPrices.setDate52low(datesql);
-				Data.Datacollection.MA_QUEUE.add(lastStockPrices);
+                if (data.has("h")) {
+                    high = data.getInt("h");
+                    if (wh52 > high) {
+                        wh52 = high;
+                        datesql52wh = datesql;
+                    }
+                }
 
-				preparedStatement.setDate(1, datesql);
-				preparedStatement.setString(2, ticker);
-				preparedStatement.setDouble(3, open);
-				preparedStatement.setDouble(4, high);
-				preparedStatement.setDouble(5, low);
-				preparedStatement.setDouble(6, close);
-				preparedStatement.setLong(7, vol);
-				preparedStatement.setDouble(8, avgvolprice);
+                if (data.has("l")) {
+                    low = data.getInt("l");
+                    if (low < wl52) {
+                        wl52 = low;
+                        datesql52wl = datesql;
+                    }
+                }
 
-				preparedStatement.setDouble(9, ma10);
-				preparedStatement.setDouble(10, ma21);
-				preparedStatement.setDouble(11, ma50);
-				preparedStatement.setDouble(12, ma200);
-				preparedStatement.setDouble(13, avgvol10days);
-				preparedStatement.setDouble(14, avgvol30days);
-				preparedStatement.setDouble(15, sd);
 
-				preparedStatement.addBatch();
+                if (data.has("c")) {
+                    close = data.getInt("c");
+                    queue10.offer(close);
+                    queue21.offer(close);
+                    queue30.offer(close);
+                    queue50.offer(close);
+                    queue200.offer(close);
+                    if (queue10.size() > 9) {
+                        priceMA10 = queue10.stream().mapToDouble(a -> a).average().getAsDouble();
+                        queue10.poll();
+                    }
+                    if (queue21.size() > 20) {
+                        priceMA21 = queue21.stream().mapToDouble(a -> a).average().getAsDouble();
+                        queue21.poll();
+                    }
 
-			}
-			preparedStatement.executeBatch();
-			System.out.println("Finsished");
+                    if (queue30.size() > 29) {
+                        sd = Datacollection.getSD(queue30);
 
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+                        double ma30 = queue30.stream().mapToDouble(a -> a).average().getAsDouble();
+                        queue30.poll();
+                        double sd2 = 2 * sd;
+                        bolup = ma30 + sd2;
+                        boldown = ma30 - sd2;
+                    }
+                    if (queue50.size() > 49) {
+                        priceMA50 = queue50.stream().mapToDouble(a -> a).average().getAsDouble();
+                        queue50.poll();
+                    }
+                    if (queue200.size() > 199) {
+                        priceMA200 = queue200.stream().mapToDouble(a -> a).average().getAsDouble();
+                        queue200.poll();
+                    }
+                }
+
+
+                if (data.has("v")) {
+                    vol = data.getInt("v");
+                    vol30days.offer(vol);
+                    vol10days.offer(vol);
+                    if (vol30days.size() > 29) {
+                        avgvol30days = vol30days.stream().mapToDouble(a -> a).average().getAsDouble();
+                        vol30days.poll();
+                    }
+                    if (vol10days.size() > 9) {
+                        avgvol10days = vol10days.stream().mapToDouble(a -> a).average().getAsDouble();
+                        vol10days.poll();
+                    }
+                }
+
+
+                if (data.has("vw")) {
+                    avgvolprice = data.getInt("vw");
+                }
+                if(close<bolup&&close>boldown){daysinbol++;}else {
+                    if(daysinbol>0)daysinbol--;
+                }
+
+
+
+                preparedStatement.setDate(1, datesql);
+                preparedStatement.setString(2, ticker);
+                preparedStatement.setDouble(3, open);
+                preparedStatement.setDouble(4, high);
+                preparedStatement.setDouble(5, low);
+                preparedStatement.setDouble(6, close);
+                preparedStatement.setLong(7, vol);
+                preparedStatement.setDouble(8, avgvolprice);
+                preparedStatement.setDouble(9, wh52);
+                preparedStatement.setDouble(10, wl52);
+                preparedStatement.setDate(11, datesql52wh);
+                preparedStatement.setDate(12, datesql52wl);
+                preparedStatement.setDouble(3, priceMA10);
+                preparedStatement.setDouble(14, priceMA21);
+                preparedStatement.setDouble(15, priceMA50);
+                preparedStatement.setDouble(16, priceMA200);
+                preparedStatement.setDouble(17, avgvol10days);
+                preparedStatement.setDouble(18, avgvol30days);
+                preparedStatement.setDouble(19, sd);
+                preparedStatement.setDouble(20, bolup);
+                preparedStatement.setDouble(21, boldown);
+                preparedStatement.setDouble(22, daysinbol);
+
+
+                preparedStatement.addBatch();
+
+            }
+            preparedStatement.executeBatch();
+            System.out.println("Finsished");
+
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
 }

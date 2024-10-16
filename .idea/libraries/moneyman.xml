@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="moneyman">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/postgresql-42.7.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Java-WebSocket-1.5.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/javax.servlet-api.jar!/" />
+      <root url="jar://$PROJECT_DIR$/circe-golden_2.13-0.4.0-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/slf4j-api-2.0.12.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jackson-core-2.2.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/json-20240303.jar!/" />
+      <root url="jar://$PROJECT_DIR$/gson-2.10.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

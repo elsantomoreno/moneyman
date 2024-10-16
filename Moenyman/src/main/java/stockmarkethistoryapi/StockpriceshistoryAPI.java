@@ -10,7 +10,7 @@ public class StockpriceshistoryAPI {
 
 		public static String getHistory(String stock,String beginn,String end){
 			HttpRequest request = HttpRequest.newBuilder()
-					.uri(URI.create("https://api.polygon.io/v2/aggs/ticker/"+stock+"/range/1/day/"+beginn+"/"+end+"?adjusted=true&sort=asc&limit=500&apiKey=tEboLkojLxgaz2hAj83wTQZIG1te0iLT"))
+					.uri(URI.create("https://api.polygon.io/v2/aggs/ticker/"+stock+"/range/1/day/"+beginn+"/"+end+"?adjusted=true&sort=asc&limit=5000&apiKey=tEboLkojLxgaz2hAj83wTQZIG1te0iLT"))
 				
 					.method("GET", HttpRequest.BodyPublishers.noBody())
 					.build();
