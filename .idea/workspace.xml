@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="1337d4d9-bc4b-4cea-89ea-8d8ffd2e0bef" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Moenyman/src/main/java/Calculation/ExponentialMovingAverage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Moenyman/src/main/java/Data/ClassVersuch.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Moenyman/src/main/java/EconomicIndicators/FredEconIndicatorsAPI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Moenyman/src/main/java/EconomicIndicators/UploadCSVInitialClaims.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Moenyman/src/main/java/Persistence/GelAllDates.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Moenyman/src/main/java/Persistence/StoringIndexPricesDaily.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Moenyman/src/main/java/Persistence/StoringIndexPricesDaily_Versuch.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Moenyman/src/main/java/databaseinitialization/CreatingTablesAndValues_onestock.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Moenyman/src/main/java/dbinitializationfirsttime/CreateAllDBTables_firsttime.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Moenyman/src/main/java/dbinitializationfirsttime/CreateAllDBTables_firsttime_versuch.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Moenyman/src/main/java/dbinitializationfirsttime/CreatingTablesAndValues_firsttime.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Moenyman/src/main/java/dbinitializationfirsttime/MainClassDataInitialization_firsttime.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Moenyman/src/main/java/stockmarkethistoryapi/FinancialHistoryAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Moenyman/src/main/java/Data/Datacollection.java" beforeDir="false" afterPath="$PROJECT_DIR$/Moenyman/src/main/java/Data/Datacollection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Moenyman/src/main/java/Persistence/GetAllTickers.java" beforeDir="false" afterPath="$PROJECT_DIR$/Moenyman/src/main/java/Persistence/GetAllTickers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Moenyman/src/main/java/Persistence/StoringAllTickers.java" beforeDir="false" afterPath="$PROJECT_DIR$/Moenyman/src/main/java/Persistence/StoringAllTickers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Moenyman/src/main/java/Persistence/StoringStockPricesDaily.java" beforeDir="false" afterPath="$PROJECT_DIR$/Moenyman/src/main/java/Persistence/StoringStockPricesDaily.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Moenyman/src/main/java/databaseinitialization/CreateAllDBTables.java" beforeDir="false" afterPath="$PROJECT_DIR$/Moenyman/src/main/java/databaseinitialization/CreateAllDBTables.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Moenyman/src/main/java/databaseinitialization/CreatingTablesAndValues.java" beforeDir="false" afterPath="$PROJECT_DIR$/Moenyman/src/main/java/databaseinitialization/CreatingTablesAndValues.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Moenyman/src/main/java/databaseinitialization/MainClassDataInitialization.java" beforeDir="false" afterPath="$PROJECT_DIR$/Moenyman/src/main/java/databaseinitialization/MainClassDataInitialization.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="2hFON9iwNaeDTWxNRlERJ8CDybT" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.ClassVersuch.executor&quot;: &quot;Run&quot;,
+    &quot;Application.DownloadFlatfiles.executor&quot;: &quot;Run&quot;,
+    &quot;Application.FredCoreCpiAPI.executor&quot;: &quot;Run&quot;,
+    &quot;Application.FredEconIndicatorsAPI.executor&quot;: &quot;Run&quot;,
+    &quot;Application.FredFederalFundRate.executor&quot;: &quot;Run&quot;,
+    &quot;Application.FredRetailSalesAPI.executor&quot;: &quot;Run&quot;,
+    &quot;Application.FredYieldAPI.executor&quot;: &quot;Run&quot;,
+    &quot;Application.MainClass.executor&quot;: &quot;Run&quot;,
+    &quot;Application.MainClassDataInitialization.executor&quot;: &quot;Run&quot;,
+    &quot;Application.MainClassDataInitialization_firsttime.executor&quot;: &quot;Run&quot;,
+    &quot;Application.MainClassStockPricehistory.executor&quot;: &quot;Run&quot;,
+    &quot;Application.MainClassWebSocket.executor&quot;: &quot;Run&quot;,
+    &quot;Application.UploadCSVInitialClaims.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="Persistence" />
+      <recent name="dbinitializationfirsttime" />
+      <recent name="stockmarkethistoryapi" />
+      <recent name="databaseinitialization" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.UploadCSVInitialClaims">
+    <configuration name="FredCoreCpiAPI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="EconomicIndicators.FredCoreCpiAPI" />
+      <module name="moneyman" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="EconomicIndicators.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="FredEconIndicatorsAPI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="EconomicIndicators.FredEconIndicatorsAPI" />
+      <module name="moneyman" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="EconomicIndicators.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="FredFederalFundRate" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="EconomicIndicators.FredFederalFundRate" />
+      <module name="moneyman" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="EconomicIndicators.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="FredRetailSalesAPI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="EconomicIndicators.FredRetailSalesAPI" />
+      <module name="moneyman" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="EconomicIndicators.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UploadCSVInitialClaims" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="EconomicIndicators.UploadCSVInitialClaims" />
+      <module name="moneyman" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="EconomicIndicators.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.UploadCSVInitialClaims" />
+        <item itemvalue="Application.FredEconIndicatorsAPI" />
+        <item itemvalue="Application.FredRetailSalesAPI" />
+        <item itemvalue="Application.FredCoreCpiAPI" />
+        <item itemvalue="Application.FredFederalFundRate" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9f38398b9061-18abd8497189-intellij.indexing.shared.core-IU-241.14494.240" />
+        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-IU-241.14494.240" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1337d4d9-bc4b-4cea-89ea-8d8ffd2e0bef" name="Changes" comment="" />
+      <created>1717186322509</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1717186322509</updated>
+      <workItem from="1717186323791" duration="70000" />
+      <workItem from="1717186400018" duration="5000" />
+      <workItem from="1717186495844" duration="5375000" />
+      <workItem from="1717193503995" duration="300000" />
+      <workItem from="1717194641393" duration="572000" />
+      <workItem from="1717249021209" duration="2901000" />
+      <workItem from="1717268098125" duration="1996000" />
+      <workItem from="1717420483048" duration="38000" />
+      <workItem from="1717423173502" duration="3740000" />
+      <workItem from="1717469124184" duration="84000" />
+      <workItem from="1717504862235" duration="12774000" />
+      <workItem from="1717602808938" duration="8313000" />
+      <workItem from="1717678860290" duration="5022000" />
+      <workItem from="1717726196417" duration="183000" />
+      <workItem from="1717764684528" duration="834000" />
+      <workItem from="1718236004793" duration="2177000" />
+      <workItem from="1718657703840" duration="1000" />
+      <workItem from="1718716440522" duration="301000" />
+      <workItem from="1718790860360" duration="12578000" />
+      <workItem from="1718865116621" duration="11678000" />
+      <workItem from="1719232976618" duration="1936000" />
+      <workItem from="1719288172931" duration="8940000" />
+      <workItem from="1720090687105" duration="566000" />
+      <workItem from="1720442718121" duration="2021000" />
+      <workItem from="1720606499746" duration="1607000" />
+      <workItem from="1720694042963" duration="260000" />
+      <workItem from="1721115825874" duration="4000" />
+      <workItem from="1721116052051" duration="3000" />
+      <workItem from="1721116177896" duration="1308000" />
+      <workItem from="1721289476643" duration="4758000" />
+      <workItem from="1724936475097" duration="2819000" />
+      <workItem from="1725121705380" duration="92000" />
+      <workItem from="1725163855844" duration="86000" />
+      <workItem from="1725252821652" duration="191000" />
+      <workItem from="1725366595172" duration="213000" />
+      <workItem from="1725446057209" duration="264000" />
+      <workItem from="1725526344286" duration="214000" />
+      <workItem from="1725634159075" duration="250000" />
+      <workItem from="1725787405698" duration="131000" />
+      <workItem from="1725819108934" duration="77000" />
+      <workItem from="1725877457121" duration="1058000" />
+      <workItem from="1725989684867" duration="249000" />
+      <workItem from="1727080457305" duration="752000" />
+      <workItem from="1727179145743" duration="180000" />
+      <workItem from="1727249380366" duration="385000" />
+      <workItem from="1727284074191" duration="1594000" />
+      <workItem from="1728977864598" duration="710000" />
+      <workItem from="1728985589393" duration="2673000" />
+      <workItem from="1728998055402" duration="50000" />
+      <workItem from="1728998484816" duration="98000" />
+      <workItem from="1729009256184" duration="253000" />
+      <workItem from="1729009567447" duration="1889000" />
+      <workItem from="1729044938792" duration="19223000" />
+      <workItem from="1729215872958" duration="860000" />
+      <workItem from="1729217078988" duration="510000" />
+      <workItem from="1729217756240" duration="7491000" />
+      <workItem from="1729477204633" duration="16707000" />
+      <workItem from="1729510858374" duration="706000" />
+      <workItem from="1729511934582" duration="1109000" />
+      <workItem from="1729558374395" duration="5429000" />
+      <workItem from="1729584744137" duration="178000" />
+      <workItem from="1729754683160" duration="2104000" />
+      <workItem from="1729822572825" duration="10576000" />
+      <workItem from="1729846949513" duration="1039000" />
+      <workItem from="1729906788127" duration="589000" />
+      <workItem from="1729907562452" duration="35000" />
+      <workItem from="1732186483091" duration="600000" />
+    </task>
+    <task id="LOCAL-00001" summary="rf">
+      <option name="closed" value="true" />
+      <created>1729049551593</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1729049551593</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="rf" />
+    <option name="LAST_COMMIT_MESSAGE" value="rf" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Moenyman/src/main/java/databaseinitialization/CreateAllDBTables.java</url>
+          <line>26</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
