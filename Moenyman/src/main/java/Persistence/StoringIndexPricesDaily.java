@@ -5,19 +5,19 @@ import Data.Datacollection;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.sql.*;
 import java.sql.Date;
+import java.sql.*;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.*;
 
-public class StoringStockPricesDaily {
+public class StoringIndexPricesDaily {
 
 
     public static String storeDailyPrices(String response) {
-        String sql = "INSERT INTO stockprices_daily(date,ticker,open,high,low,close,"
+        String sql = "INSERT INTO index_daily(date,ticker,open,high,low,close,"
                 + "vol,volavgprice,wh52,wl52,dwh52,dwl52,ma10,ema21,ma50,ma200,avgvol10days,avgvol30days,sd,bolup,boldown,daysinbol,ma10abvma21ema,ema21abv50ma) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
         int counter = 0;
         String ticker = null;

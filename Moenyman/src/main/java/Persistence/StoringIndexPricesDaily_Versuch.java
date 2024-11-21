@@ -5,20 +5,22 @@ import Data.Datacollection;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.sql.*;
 import java.sql.Date;
+import java.sql.*;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.*;
 
-public class StoringStockPricesDaily {
+public class StoringIndexPricesDaily_Versuch {
 
 
     public static String storeDailyPrices(String response) {
-        String sql = "INSERT INTO stockprices_daily(date,ticker,open,high,low,close,"
-                + "vol,volavgprice,wh52,wl52,dwh52,dwl52,ma10,ema21,ma50,ma200,avgvol10days,avgvol30days,sd,bolup,boldown,daysinbol,ma10abvma21ema,ema21abv50ma) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+        String sql = "UPDATE index_daily SET open = ?, high = ?, low = ?, close = ?, vol = ?, volavgprice = ?, "
+                + "wh52 = ?, wl52 = ?, dwh52 = ?, dwl52 = ?, ma10 = ?, ema21 = ?, ma50 = ?, ma200 = ?, "
+                + "avgvol10days = ?, avgvol30days = ?, sd = ?, bolup = ?, boldown = ?, daysinbol = ?, "
+                + "ma10abvma21ema = ?, ema21abv50ma = ? WHERE ticker = 'QQQ' AND date = ?;";
         int counter = 0;
         String ticker = null;
         try (Connection connection = DriverManager.getConnection(CredentialsPostGres.jdbcUrl, CredentialsPostGres.username, CredentialsPostGres.password)) {
@@ -202,30 +204,29 @@ public class StoringStockPricesDaily {
 
 
                 //  System.out.println("date: " + datesql.toString() + " open: " + open + " high: " + high + " low: " + low + " close: " + close + " counter: " + counter++);
-                preparedStatement.setDate(1, datesql);
-                preparedStatement.setString(2, ticker);
-                preparedStatement.setDouble(3, open);
-                preparedStatement.setDouble(4, high);
-                preparedStatement.setDouble(5, low);
-                preparedStatement.setDouble(6, close);
-                preparedStatement.setLong(7, vol);
-                preparedStatement.setDouble(8, avgvolprice);
-                preparedStatement.setDouble(9, wh52);
-                preparedStatement.setDouble(10, wl52);
-                preparedStatement.setDate(11, datesql52wh);
-                preparedStatement.setDate(12, datesql52wl);
-                preparedStatement.setDouble(13, priceMA10);
-                preparedStatement.setDouble(14, priceMA21);
-                preparedStatement.setDouble(15, priceMA50);
-                preparedStatement.setDouble(16, priceMA200);
-                preparedStatement.setDouble(17, avgvol10days);
-                preparedStatement.setDouble(18, avgvol30days);
-                preparedStatement.setDouble(19, sd);
-                preparedStatement.setDouble(20, bolup);
-                preparedStatement.setDouble(21, boldown);
-                preparedStatement.setLong(22, totaldaybol);
-                preparedStatement.setBoolean(23, ma10abv21);
-                preparedStatement.setBoolean(24, ema21abv50);
+                preparedStatement.setDouble(1, open);
+                preparedStatement.setDouble(2, high);
+                preparedStatement.setDouble(3, low);
+                preparedStatement.setDouble(4, close);
+                preparedStatement.setLong(5, vol);
+                preparedStatement.setDouble(6, avgvolprice);
+                preparedStatement.setDouble(7, wh52);
+                preparedStatement.setDouble(8, wl52);
+                preparedStatement.setDate(9, datesql52wh);
+                preparedStatement.setDate(10, datesql52wl);
+                preparedStatement.setDouble(11, priceMA10);
+                preparedStatement.setDouble(12, priceMA21);
+                preparedStatement.setDouble(13, priceMA50);
+                preparedStatement.setDouble(14, priceMA200);
+                preparedStatement.setDouble(15, avgvol10days);
+                preparedStatement.setDouble(16, avgvol30days);
+                preparedStatement.setDouble(17, sd);
+                preparedStatement.setDouble(18, bolup);
+                preparedStatement.setDouble(19, boldown);
+                preparedStatement.setLong(20, totaldaybol);
+                preparedStatement.setBoolean(21, ma10abv21);
+                preparedStatement.setBoolean(22, ema21abv50);
+                preparedStatement.setDate(23, datesql);
 
 
                 preparedStatement.addBatch();

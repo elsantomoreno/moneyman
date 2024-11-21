@@ -18,6 +18,7 @@ public class Datacollection {
 	public static final BlockingQueue<StockIntraDayPrices> INTRADAY_ARRAY = new LinkedBlockingQueue<>();
 
 	public static final Queue<StockPrices> MA_QUEUE = new ArrayDeque<>();
+	public static final Queue<Date> DATE_QUEUE = new ArrayDeque<>();
 	
 
 

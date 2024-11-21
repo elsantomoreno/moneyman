@@ -32,7 +32,7 @@ public class StoringAllTickers {
 
 	public void storeAllTickers(String url) {
 		String response=AllTickersAPI.getAllTickers(url);
-		String sql = "INSERT INTO alltickers (active,ticker) VALUES(?,?);";
+		String sql = "INSERT INTO allticker (active,ticker) VALUES(?,?);";
 
 		try (Connection connection = DriverManager.getConnection(CredentialsPostGres.jdbcUrl, CredentialsPostGres.username, CredentialsPostGres.password)) {
 
@@ -42,7 +42,7 @@ public class StoringAllTickers {
 
 			// Extract the array of historical stock data
 			JSONArray results = res.getJSONArray("results");
-			String nexturl = res.getString("next_url");
+
 		
 
 			// Iterate over each entry in the historical stock data array
@@ -52,7 +52,7 @@ public class StoringAllTickers {
 			boolean active = false;
 				if (data.has("active")) {
 					 active = data.getBoolean("active");
-					 System.out.println(active);
+
 			
 				}
 
@@ -70,10 +70,11 @@ public class StoringAllTickers {
 			}
 			preparedStatement.executeBatch();
 			StoringAllTickers so=new StoringAllTickers();
+			String nexturl = res.getString("next_url");
 		String next=nexturl+"&apiKey=tEboLkojLxgaz2hAj83wTQZIG1te0iLT";
 			
 		so.storeAllTickers(next);
-			System.out.println("Finsished");
+			System.out.println("Finsished storing all tickers");
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
