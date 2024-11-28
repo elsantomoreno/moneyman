@@ -4,27 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1337d4d9-bc4b-4cea-89ea-8d8ffd2e0bef" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Moenyman/src/main/java/Calculation/ExponentialMovingAverage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Moenyman/src/main/java/Data/ClassVersuch.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Moenyman/src/main/java/EconomicIndicators/FredEconIndicatorsAPI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Moenyman/src/main/java/EconomicIndicators/UploadCSVInitialClaims.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Moenyman/src/main/java/Persistence/GelAllDates.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Moenyman/src/main/java/Persistence/StoringIndexPricesDaily.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Moenyman/src/main/java/Persistence/StoringIndexPricesDaily_Versuch.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Moenyman/src/main/java/databaseinitialization/CreatingTablesAndValues_onestock.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Moenyman/src/main/java/dbinitializationfirsttime/CreateAllDBTables_firsttime.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Moenyman/src/main/java/dbinitializationfirsttime/CreateAllDBTables_firsttime_versuch.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Moenyman/src/main/java/dbinitializationfirsttime/CreatingTablesAndValues_firsttime.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Moenyman/src/main/java/dbinitializationfirsttime/MainClassDataInitialization_firsttime.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Moenyman/src/main/java/stockmarkethistoryapi/FinancialHistoryAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Moenyman/src/main/java/Data/Datacollection.java" beforeDir="false" afterPath="$PROJECT_DIR$/Moenyman/src/main/java/Data/Datacollection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Moenyman/src/main/java/Persistence/GetAllTickers.java" beforeDir="false" afterPath="$PROJECT_DIR$/Moenyman/src/main/java/Persistence/GetAllTickers.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Moenyman/src/main/java/Persistence/StoringAllTickers.java" beforeDir="false" afterPath="$PROJECT_DIR$/Moenyman/src/main/java/Persistence/StoringAllTickers.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Moenyman/src/main/java/Persistence/StoringStockPricesDaily.java" beforeDir="false" afterPath="$PROJECT_DIR$/Moenyman/src/main/java/Persistence/StoringStockPricesDaily.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Moenyman/src/main/java/databaseinitialization/CreateAllDBTables.java" beforeDir="false" afterPath="$PROJECT_DIR$/Moenyman/src/main/java/databaseinitialization/CreateAllDBTables.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Moenyman/src/main/java/databaseinitialization/CreatingTablesAndValues.java" beforeDir="false" afterPath="$PROJECT_DIR$/Moenyman/src/main/java/databaseinitialization/CreatingTablesAndValues.java" afterDir="false" />
+    <list default="true" id="1337d4d9-bc4b-4cea-89ea-8d8ffd2e0bef" name="Changes" comment="rf">
+      <change afterPath="$PROJECT_DIR$/Moenyman/src/main/java/EconomicIndicators/FredAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Moenyman/src/main/java/Data/ClassVersuch.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Moenyman/src/main/java/Data/ClassVersuchMethod.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Moenyman/src/main/java/Persistence/StoringStockPricesIntra.java" beforeDir="false" afterPath="$PROJECT_DIR$/Moenyman/src/main/java/Persistence/StoringStockPricesIntra.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Moenyman/src/main/java/databaseinitialization/MainClassDataInitialization.java" beforeDir="false" afterPath="$PROJECT_DIR$/Moenyman/src/main/java/databaseinitialization/MainClassDataInitialization.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Moenyman/src/main/java/stockmarkethistoryapi/FinancialHistoryAPI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/moneyman/Data/ClassVersuch.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/moneyman/Data/ClassVersuchMethod.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +24,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -54,8 +44,10 @@
   &quot;keyToString&quot;: {
     &quot;Application.ClassVersuch.executor&quot;: &quot;Run&quot;,
     &quot;Application.DownloadFlatfiles.executor&quot;: &quot;Run&quot;,
+    &quot;Application.FredAPI.executor&quot;: &quot;Run&quot;,
     &quot;Application.FredCoreCpiAPI.executor&quot;: &quot;Run&quot;,
     &quot;Application.FredEconIndicatorsAPI.executor&quot;: &quot;Run&quot;,
+    &quot;Application.FredEconIndicatorsAPI_versuch.executor&quot;: &quot;Run&quot;,
     &quot;Application.FredFederalFundRate.executor&quot;: &quot;Run&quot;,
     &quot;Application.FredRetailSalesAPI.executor&quot;: &quot;Run&quot;,
     &quot;Application.FredYieldAPI.executor&quot;: &quot;Run&quot;,
@@ -82,15 +74,16 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="EconomicIndicators" />
       <recent name="Persistence" />
       <recent name="dbinitializationfirsttime" />
       <recent name="stockmarkethistoryapi" />
       <recent name="databaseinitialization" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.UploadCSVInitialClaims">
-    <configuration name="FredCoreCpiAPI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="EconomicIndicators.FredCoreCpiAPI" />
+  <component name="RunManager" selected="Application.FredAPI">
+    <configuration name="FredAPI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="EconomicIndicators.FredAPI" />
       <module name="moneyman" />
       <extension name="coverage">
         <pattern>
@@ -115,8 +108,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="FredFederalFundRate" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="EconomicIndicators.FredFederalFundRate" />
+    <configuration name="FredEconIndicatorsAPI_versuch" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="EconomicIndicators.FredEconIndicatorsAPI_versuch" />
       <module name="moneyman" />
       <extension name="coverage">
         <pattern>
@@ -156,11 +149,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.FredAPI" />
+        <item itemvalue="Application.FredEconIndicatorsAPI_versuch" />
         <item itemvalue="Application.UploadCSVInitialClaims" />
         <item itemvalue="Application.FredEconIndicatorsAPI" />
         <item itemvalue="Application.FredRetailSalesAPI" />
-        <item itemvalue="Application.FredCoreCpiAPI" />
-        <item itemvalue="Application.FredFederalFundRate" />
       </list>
     </recent_temporary>
   </component>
@@ -246,7 +239,22 @@
       <workItem from="1729846949513" duration="1039000" />
       <workItem from="1729906788127" duration="589000" />
       <workItem from="1729907562452" duration="35000" />
-      <workItem from="1732186483091" duration="600000" />
+      <workItem from="1732186483091" duration="1260000" />
+      <workItem from="1732216656293" duration="56000" />
+      <workItem from="1732216996870" duration="873000" />
+      <workItem from="1732624771604" duration="73000" />
+      <workItem from="1732625283484" duration="245000" />
+      <workItem from="1732625584035" duration="283000" />
+      <workItem from="1732628153143" duration="2516000" />
+      <workItem from="1732632735406" duration="1124000" />
+      <workItem from="1732648417036" duration="7000" />
+      <workItem from="1732651723663" duration="41000" />
+      <workItem from="1732707962389" duration="94000" />
+      <workItem from="1732708365151" duration="2000" />
+      <workItem from="1732708373244" duration="6000" />
+      <workItem from="1732708506809" duration="1066000" />
+      <workItem from="1732742349275" duration="780000" />
+      <workItem from="1732791085123" duration="348000" />
     </task>
     <task id="LOCAL-00001" summary="rf">
       <option name="closed" value="true" />
@@ -256,7 +264,23 @@
       <option name="project" value="LOCAL" />
       <updated>1729049551593</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="rf">
+      <option name="closed" value="true" />
+      <created>1732201920570</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1732201920570</updated>
+    </task>
+    <task id="LOCAL-00003" summary="rf">
+      <option name="closed" value="true" />
+      <created>1732201947466</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1732201947466</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

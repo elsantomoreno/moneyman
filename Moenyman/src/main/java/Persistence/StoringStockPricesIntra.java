@@ -50,6 +50,7 @@ public class StoringStockPricesIntra implements Runnable {
                         preparedStatement.setDouble(12, intraprice.getAccvol());
                         preparedStatement.setDouble(13, intraprice.getTodayVolAvgPrice());
 
+                        
 
                         preparedStatement.addBatch();
 
