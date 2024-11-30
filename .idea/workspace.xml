@@ -4,17 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1337d4d9-bc4b-4cea-89ea-8d8ffd2e0bef" name="Changes" comment="rf">
-      <change afterPath="$PROJECT_DIR$/Moenyman/src/main/java/EconomicIndicators/FredAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Moenyman/src/main/java/Data/ClassVersuch.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Moenyman/src/main/java/Data/ClassVersuchMethod.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Moenyman/src/main/java/Persistence/StoringStockPricesIntra.java" beforeDir="false" afterPath="$PROJECT_DIR$/Moenyman/src/main/java/Persistence/StoringStockPricesIntra.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Moenyman/src/main/java/databaseinitialization/MainClassDataInitialization.java" beforeDir="false" afterPath="$PROJECT_DIR$/Moenyman/src/main/java/databaseinitialization/MainClassDataInitialization.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Moenyman/src/main/java/stockmarkethistoryapi/FinancialHistoryAPI.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/moneyman/Data/ClassVersuch.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/moneyman/Data/ClassVersuchMethod.class" beforeDir="false" />
-    </list>
+    <list default="true" id="1337d4d9-bc4b-4cea-89ea-8d8ffd2e0bef" name="Changes" comment="rf" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -255,6 +245,7 @@
       <workItem from="1732708506809" duration="1066000" />
       <workItem from="1732742349275" duration="780000" />
       <workItem from="1732791085123" duration="348000" />
+      <workItem from="1732791635606" duration="265000" />
     </task>
     <task id="LOCAL-00001" summary="rf">
       <option name="closed" value="true" />
@@ -280,7 +271,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732201947466</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="rf">
+      <option name="closed" value="true" />
+      <created>1732791890673</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1732791890673</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
